@@ -6,7 +6,7 @@ export const settingsService = {
     const where = {}
     if (group) where.settingGroup = group
     const rows = await prisma.setting.findMany({ where, orderBy: [{ settingGroup: 'asc' }, { settingKey: 'asc' }] })
-    // Return as nested object: { general: { site_name: 'ImpactGuru', ... }, ... }
+    // Return as nested object: { general: { site_name: 'Funddoo', ... }, ... }
     return rows.reduce((acc, s) => {
       if (!acc[s.settingGroup]) acc[s.settingGroup] = {}
       acc[s.settingGroup][s.settingKey] = castValue(s.settingValue, s.settingType)
